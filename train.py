@@ -16,6 +16,14 @@ from keras.utils import np_utils, to_categorical
  
 from keras.datasets import imdb
 
+
+if not os.path.exists('output'):
+    os.mkdir('output')
+f = open("testme.txt", 'w')
+   f.write("hellllo")
+   f.close()
+
+
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
 path="imdb.npz",
 num_words=10000)
@@ -110,6 +118,4 @@ print("_"*100)
 print("Test Loss and Accuracy")
 print("results ", results)
 
-if not os.path.exists('output'):
-    os.mkdir('output')
 model.save('output/sentiment2.model.h5')
