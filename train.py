@@ -1,4 +1,5 @@
 import os
+import time
 from operator import itemgetter    
 import numpy as np
 #import matplotlib.pyplot as plt
@@ -24,6 +25,8 @@ f = open("output/testme.txt", 'w')
 f.write("hellllo")
 f.close()
 
+print("going to sleep for 5 min")
+time.sleep(300)
 
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
 path="imdb.npz",
