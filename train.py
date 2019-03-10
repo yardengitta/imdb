@@ -19,7 +19,7 @@ from keras.datasets import imdb
 
 if not os.path.exists('output'):
     os.mkdir('output')
-f = open("testme.txt", 'w')
+f = open("output/testme.txt", 'w')
    f.write("hellllo")
    f.close()
 
