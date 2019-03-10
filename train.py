@@ -19,9 +19,10 @@ from keras.datasets import imdb
 
 if not os.path.exists('output'):
     os.mkdir('output')
+
 f = open("output/testme.txt", 'w')
-   f.write("hellllo")
-   f.close()
+f.write("hellllo")
+f.close()
 
 
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
