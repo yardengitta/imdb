@@ -16,7 +16,7 @@ from keras.layers import Dense
 from keras.utils import np_utils, to_categorical
  
 from keras.datasets import imdb
-
+tensorboard --logdir=output/
 
 if not os.path.exists('output'):
     os.mkdir('output')
