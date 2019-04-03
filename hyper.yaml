@@ -1,0 +1,20 @@
+# Hyperparameter Optimization is the process of choosing a set of parameters for a learning algorithm, usually with the goal of optimizing a measure of the algorithm's performance on an independent data set.
+
+# Below is the list of parameters that will be used in the optimization process. Each parameter has a param_name that should match the argument that is feeded to the experiment s.t kernel => --kernel='rbf'
+
+parameters:
+  # Integer parameter is a range of possible values between a minimum (inclusive)
+  # and maximum (not inclusive) values. Values are floored (0.7 => 0)
+    - param_name: "learning_rate"
+      type: "integer" 
+      min: 0 # inclusive
+      max: 10 # not inclusive
+      scale: "linear"
+      steps: 4 # The number of linear steps to produce.
+
+    # Categorical parameter is an array of string values
+    #
+    - param_name: "kernel"
+      type: "categorical"
+      values: ["linear", "poly", "rbf"] 
+    
