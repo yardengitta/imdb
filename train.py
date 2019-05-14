@@ -29,11 +29,11 @@ f.close()
 path="imdb.npz",
 num_words=10000)
 
-print("going to sleep for 5 min")
-time.sleep(300)
 print("train_data ", train_data.shape)
 print("train_labels ", train_labels.shape)
 print("_"*100)
+print("Going to sleep for 20 min")
+time.sleep(1200)
 print("test_data ", test_data.shape)
 print("test_labels ", test_labels.shape)
 print("_"*100)
