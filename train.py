@@ -16,8 +16,7 @@ from keras.utils import np_utils, to_categorical
  
 from keras.datasets import imdb
 
-(train_data, train_labels), (test_data, test_labels) = imdb.load_data(
-path="imdb.npz",
+(train_data, train_labels), (test_data, test_labels) = imdb.load_data(path="/data/mnist_dataset/mnist.npz",
 num_words=10000)
 
 print("train_data ", train_data.shape)
