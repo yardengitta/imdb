@@ -20,7 +20,7 @@ parser.add_argument('--dataset_path', action="store",
 parser.add_argument('--num_words', action="store",
                     dest='num_words', type=int, default=10000)
 parser.add_argument('--dropout', action="store",
-                    dest='dropout', type=float, default=0.2)
+                    dest='dropout', type=float, default=0.5)
 parser.add_argument('--learning_rate', action="store",
                     dest='learning_rate', type=float, default=0.001)
 
