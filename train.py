@@ -79,12 +79,12 @@ print("partial_y_train ", partial_y_train.shape)
 # NN MODEL
 
 # Use of DROPOUT
-#model = models.Sequential()
-#model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(0.001), activation='relu', input_shape=(10000,)))
-#model.add(layers.Dropout(0.5))
-#model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(0.001),activation='relu'))
-#model.add(layers.Dropout(0.5))
-#model.add(layers.Dense(1, activation='sigmoid'))
+model = models.Sequential()
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(0.001), activation='relu', input_shape=(10000,)))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(0.001),activation='relu'))
+model.add(layers.Dropout(0.5))
+model.add(layers.Dense(1, activation='sigmoid'))
 
 # Use of REGULARIZATION
 model = models.Sequential()
@@ -93,12 +93,12 @@ model.add(layers.Dense(16, kernel_regularizer=regularizers.l1_l2(l1=0.001, l2=0.
 model.add(layers.Dense(1, activation='sigmoid'))
 
 # REGULARIZERS L1 L2
-#regularizers.l1(0.001)
-#regularizers.l2(0.001)
+regularizers.l1(0.001)
+regularizers.l2(0.001)
 regularizers.l1_l2(l1=0.001, l2=0.001)
 
 # OPTIMIZERS
-#model.compile(optimizer=optimizers.RMSprop(lr=0.001), loss=losses.binary_crossentropy, metrics=[metrics.binary_accuracy])
+model.compile(optimizer=optimizers.RMSprop(lr=0.001), loss=losses.binary_crossentropy, metrics=[metrics.binary_accuracy])
 model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
 
 # FIT / TRAIN model
