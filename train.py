@@ -126,6 +126,9 @@ print("_"*100)
 print("Test Loss and Accuracy")
 print("results ", results)
 
+print('cnvrg_tag_TestLoss:', results[0])
+print('cnvrg_tag_TestAccuracy:', results[1])
+
 if not os.path.exists('output'):
     os.mkdir('output')
 model.save('output/sentiment2.model.h5')
