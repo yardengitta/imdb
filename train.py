@@ -18,7 +18,7 @@ parser = argparse.ArgumentParser(description='set input arguments')
 parser.add_argument('--dataset_path', action="store",
                     dest='dataset_path', type=str, default="/data/imdb_data/imdb.npz")
 parser.add_argument('--num_words', action="store",
-                    dest='num_words', type=int, default=20000)
+                    dest='num_words', type=int, default=10000)
 parser.add_argument('--dropout', action="store",
                     dest='dropout', type=float, default=0.2)
 parser.add_argument('--learning_rate', action="store",
