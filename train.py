@@ -17,6 +17,13 @@ import argparse
 parser = argparse.ArgumentParser(description='set input arguments')
 parser.add_argument('--dataset_path', action="store",
                     dest='dataset_path', type=str, default="/data/imdb_data/imdb.npz")
+parser.add_argument('--num_words', action="store",
+                    dest='num_words', type=int, default=20000)
+parser.add_argument('--dropout', action="store",
+                    dest='dropout', type=float, default=0.2)
+parser.add_argument('--learning_rate', action="store",
+                    dest='learning_rate', type=float, default=0.001)
+
 args = parser.parse_args()
 dataset_path = args.dataset_path
 
@@ -24,7 +31,7 @@ dataset_path = args.dataset_path
 from keras.datasets import imdb
 
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
-path=dataset_path, num_words=10000)
+path=dataset_path, num_words=num_words)
 
 print("train_data ", train_data.shape)
 print("train_labels ", train_labels.shape)
@@ -45,7 +52,7 @@ reverse_word_index = dict(
 # Encoding the integer sequences into a binary matrix - one hot encoder basically
 # From integers representing words, at various lengths - to a normalized one hot encoded tensor (matrix) of 10k columns
 
-def vectorize_sequences(sequences, dimension=10000):
+def vectorize_sequences(sequences, dimension=num_words):
     results = np.zeros((len(sequences), dimension))
     for i, sequence in enumerate(sequences):
         results[i, sequence] = 1.
@@ -67,10 +74,10 @@ print("y_test ", y_test.shape)
 
 # Set a VALIDATION set
 
-x_val = x_train[:10000]
-partial_x_train = x_train[10000:]
-y_val = y_train[:10000]
-partial_y_train = y_train[10000:]
+x_val = x_train[:num_words]
+partial_x_train = x_train[num_words:]
+y_val = y_train[:num_words]
+partial_y_train = y_train[num_words:]
 
 print("x_val ", x_val.shape)
 print("partial_x_train ", partial_x_train.shape)
@@ -81,25 +88,25 @@ print("partial_y_train ", partial_y_train.shape)
 
 # Use of DROPOUT
 model = models.Sequential()
-model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(0.001), activation='relu', input_shape=(10000,)))
-model.add(layers.Dropout(0.5))
-model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(0.001),activation='relu'))
-model.add(layers.Dropout(0.5))
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(learning_rate), activation='relu', input_shape=(num_words,)))
+model.add(layers.Dropout(dropout))
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l1(learning_rate),activation='relu'))
+model.add(layers.Dropout(dropout))
 model.add(layers.Dense(1, activation='sigmoid'))
 
 # Use of REGULARIZATION
 model = models.Sequential()
-model.add(layers.Dense(16, kernel_regularizer=regularizers.l1_l2(l1=0.001, l2=0.001),activation='relu', input_shape=(10000,)))
-model.add(layers.Dense(16, kernel_regularizer=regularizers.l1_l2(l1=0.001, l2=0.001),activation='relu'))
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l1_l2(l1=learning_rate, l2=learning_rate),activation='relu', input_shape=(num_words,)))
+model.add(layers.Dense(16, kernel_regularizer=regularizers.l1_l2(l1=learning_rate, l2=learning_rate),activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 
 # REGULARIZERS L1 L2
-regularizers.l1(0.001)
-regularizers.l2(0.001)
-regularizers.l1_l2(l1=0.001, l2=0.001)
+regularizers.l1(learning_rate)
+regularizers.l2(learning_rate)
+regularizers.l1_l2(l1=learning_rate, l2=learning_rate)
 
 # OPTIMIZERS
-model.compile(optimizer=optimizers.RMSprop(lr=0.001), loss=losses.binary_crossentropy, metrics=[metrics.binary_accuracy])
+model.compile(optimizer=optimizers.RMSprop(lr=learning_rate), loss=losses.binary_crossentropy, metrics=[metrics.binary_accuracy])
 model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'])
 
 # FIT / TRAIN model
