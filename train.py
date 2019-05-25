@@ -17,6 +17,7 @@ import argparse
 parser = argparse.ArgumentParser(description='set input arguments')
 parser.add_argument('--dataset_path', action="store",
                     dest='dataset_path', type=str, default="/data/imdb_data/imdb.npz")
+args = parser.parse_args()
 dataset_path = args.dataset_path
 
  
