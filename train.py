@@ -13,12 +13,20 @@ from keras import models, regularizers, layers, optimizers, losses, metrics
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.utils import np_utils, to_categorical
+
+
+import argparse
+
+parser = argparse.ArgumentParser(description='set input arguments')
+parser.add_argument('--dataset_path', action="store",
+                    dest='dataset_path', type=str, default="/data/imdb_data/imdb.npz")
+ataset_path = args.dataset_path
+
  
 from keras.datasets import imdb
 
 (train_data, train_labels), (test_data, test_labels) = imdb.load_data(
-path="imdb.npz",
-num_words=10000)
+path=dataset_path, num_words=10000)
 
 print("train_data ", train_data.shape)
 print("train_labels ", train_labels.shape)
