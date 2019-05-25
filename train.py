@@ -26,6 +26,9 @@ parser.add_argument('--learning_rate', action="store",
 
 args = parser.parse_args()
 dataset_path = args.dataset_path
+num_words = args.num_words
+dropout       = args.dropout
+learning_rate = args.learning_rate
 
  
 from keras.datasets import imdb
