@@ -56,7 +56,7 @@ reverse_word_index = dict(
 # From integers representing words, at various lengths - to a normalized one hot encoded tensor (matrix) of 10k columns
 
 def vectorize_sequences(sequences, dimension=num_words):
-    results = np.zeros((len(sequences), dimension))
+    results = np.zeros((len(sequences), dimension), dtype=np.float32)
     for i, sequence in enumerate(sequences):
         results[i, sequence] = 1.
     return results
