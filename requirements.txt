@@ -1,4 +1,1 @@
-numpy==1.16.2
-keras
-keras_applications
-keras_preprocessing
+numpy==1.16.1
