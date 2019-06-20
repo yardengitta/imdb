@@ -16,7 +16,6 @@ from keras.layers import Dense
 from keras.utils import np_utils, to_categorical
  
 from keras.datasets import imdb
-exit(1)
 if not os.path.exists('output'):
     os.mkdir('output')
 
