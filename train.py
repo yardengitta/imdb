@@ -97,7 +97,7 @@ model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'
 
 # FIT / TRAIN model
 
-NumEpochs = 1000
+NumEpochs = 12
 BatchSize = 512
 
 #model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['acc'])
