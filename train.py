@@ -1,13 +1,22 @@
+
+from datetime import datetime
+from packaging import version
+
 import os
 from operator import itemgetter    
 import numpy as np
-#import matplotlib.pyplot as plt
 import warnings
 warnings.filterwarnings('ignore')
-#get_ipython().magic(u'matplotlib inline')
-#plt.style.use('ggplot')
+
 
 import tensorflow as tf
+
+print("TensorFlow version: ", tf.__version__)
+
+device_name = tf.test.gpu_device_name()
+if not device_name:
+  raise SystemError('GPU device not found')
+print('Found GPU at: {}'.format(device_name))
 
 from keras import models, regularizers, layers, optimizers, losses, metrics
 from keras.models import Sequential
@@ -100,9 +109,18 @@ model.compile(optimizer='rmsprop',loss='binary_crossentropy',metrics=['accuracy'
 NumEpochs = 12
 BatchSize = 512
 
+
+# Create a TensorBoard callback
+logs = "logs/" + datetime.now().strftime("%Y%m%d-%H%M%S")
+
+tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
+                                                 histogram_freq = 1,
+                                                 profile_batch = '500,520')
+
+
 #model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['acc'])
 
-history = model.fit(partial_x_train, partial_y_train, epochs=NumEpochs, batch_size=BatchSize, validation_data=(x_val, y_val))
+history = model.fit(partial_x_train, partial_y_train, epochs=NumEpochs, batch_size=BatchSize, validation_data=(x_val, y_val),callbacks = [tboard_callback])
 
 results = model.evaluate(x_test, y_test)
 print("_"*100)
