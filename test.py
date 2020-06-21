@@ -7,3 +7,5 @@ for x in range(10001,10010):
    f = open(name_file, 'w')
    f.write(str(x) + "\n" + str(20000-x))
    f.close()
+import time
+time.sleep(1000)
