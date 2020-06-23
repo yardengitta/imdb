@@ -1,4 +1,19 @@
 
+from datetime import datetime
+from packaging import version
+
+import os
+
+
+import tensorflow as tf
+
+print("TensorFlow version: ", tf.__version__)
+device_name = tf.test.gpu_device_name()
+if not device_name:
+  raise SystemError('GPU device not found')
+print('Found GPU at: {}'.format(device_name))
+
+
 import tensorflow_datasets as tfds
 tfds.disable_progress_bar()
 
