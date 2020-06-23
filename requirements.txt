@@ -1,2 +1,3 @@
 matplotlib
 tensorboard_plugin_profile
+keras
